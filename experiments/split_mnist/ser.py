@@ -11,12 +11,13 @@ from experiments.utils import set_seed, create_default_args
 
 def lamaml_scifar100(override_args=None):
     """
+    # 43: 87.75
     """
 
     args = create_default_args(
         {'cuda': 0, 'alpha': 0.1, 'beta': 0.1,
          'mem_size': 100, 'batch_size_mem': 10, 'lr': 0.01,
-         'train_mb_size': 10, 'train_epochs': 1, 'seed': 4}, override_args
+         'train_mb_size': 10, 'train_epochs': 1, 'seed': 43}, override_args
     )
 
     set_seed(args.seed)

@@ -14,9 +14,9 @@ def lamaml_scifar100(override_args=None):
     """
 
     args = create_default_args(
-        {'cuda': 0, 'alpha': 0.2, 'beta': 1.0,
-         'mem_size': 200, 'batch_size_mem': 10, 'lr': 0.03,
-         'train_mb_size': 10, 'train_epochs': 1, 'seed': None}, override_args
+        {'cuda': 0, 'alpha': 0.2, 'beta': 0.5,
+         'mem_size': 100, 'batch_size_mem': 10, 'lr': 0.03,
+         'train_mb_size': 10, 'train_epochs': 1, 'seed': 4}, override_args
     )
 
     set_seed(args.seed)

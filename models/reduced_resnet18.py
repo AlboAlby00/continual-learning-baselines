@@ -75,6 +75,22 @@ class ResNet(nn.Module):
         out = self.layer4(out)
         out = avg_pool2d(out, 4)
         return out
+    
+class SingleHeadResNet18(torch.nn.Module):
+    def __init__(self, num_classes, nf: int=64):
+        super().__init__()
+        block = BasicBlock
+        self.resnet = ResNet(BasicBlock, [2, 2, 2, 2], nf)
+        classifier_width = nf * 8 * block.expansion 
+        self.classifier = nn.Linear(classifier_width, num_classes)
+
+    def feature_extractor(self, x):
+        out = self.resnet(x)
+        return out.view(out.size(0), -1)
+
+    def forward(self, x):
+        out = self.feature_extractor(x)
+        return self.classifier(out)
 
 
 """
@@ -113,4 +129,4 @@ class SingleHeadReducedResNet18(torch.nn.Module):
         return self.classifier(out)
 
 
-__all__ = ['MultiHeadReducedResNet18', 'SingleHeadReducedResNet18']
+__all__ = ['MultiHeadReducedResNet18', 'SingleHeadReducedResNet18', 'SingleHeadResNet18']
